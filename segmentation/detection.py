@@ -15,7 +15,7 @@ class Detector(object):
     # NOT consider values of 0 in the average since this is used as an error state by
     # the Kinect camera.
     def get_average_values(self, width_for_avg, array):
-        assert width_for_avg != 0
+        assert width_for_avg != 0       
         height, width = array.shape
         center = width/2
         starting_width_index = center - (width_for_avg/2)
@@ -23,12 +23,13 @@ class Detector(object):
         average_array = np.zeros(height)
         for y in range(0, height):
             sum = 0.0
-            number_of_elements = 1
+            number_of_elements = 0 # Originally = 1, changed to = 0 
             for x in range(starting_width_index, ending_width_index):
                 if array[y][x] != 0:
                     sum += array[y][x]
                     number_of_elements = number_of_elements + 1
-            average_array[y] = sum/number_of_elements
+            if number_of_elements > 0   # added to deal with possibility of all 0 row
+                average_array[y] = sum/number_of_elements
         return average_array
 
 
