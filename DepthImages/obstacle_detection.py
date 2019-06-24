@@ -11,7 +11,7 @@ def detect(input, width, threshold):
     # Gets the 640 x 480 array and turns it into a 1-d array across the middle.  <- meaning it takes middle depth value and uses it instead of average
     if len(np.shape(array)) > 1:
         h, w = np.shape(array)
-        array = array[:, int(w/2)] # <- added int() to make it run in IPython console, I think it's necessary
+        array = array[:, w/2]
 
     # Remove 0s, as they are error values.
     array = array[array != 0]
